@@ -3,6 +3,38 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script id="yama47-bas">
+/* ==========================================================================
+   yama47 — 21.10.2026 — KULLANICININ 21.10.2026 20:16-20:19 NOTU
+   "Telefonda da bu şekilde gelsin direkt" (bilgisayardaki ekranın resmiyle).
+     · Telefonda ve tablette program her açılışta doğrudan bilgisayardaki
+       görünümle gelir (sayfa telefonda 1500, tablette 1200 nokta enindeymiş
+       gibi çizilir; parmakla büyütüp kaydırılarak kullanılır), bilgisayardaki
+       gibi Aylık Puantaj sayfasıyla açılır.
+     · Başlıktaki mor düğmenin adı açılışta "📱 Telefon görünümü" (tablette
+       "📱 Tablet görünümü") olur; basınca telefona göre düzene geçilir, yine
+       basınca bilgisayardaki görünüme dönülür.
+   Bu betik build.py ile <head> içine, viewport satırının hemen arkasına
+   taşınır; böylece sayfa telefonda ilk çizimden itibaren bilgisayar
+   düzeniyle açılır (önce telefon düzeni görünüp sonra değişmez).
+   Mor düğme telefonda ve tablette iki görünümde de hep görünür (yan
+   çevrilmiş geniş tablette telefon düzenine geçince de kaybolmaz).
+   yama43'te dokunmatik ekranda BELGELER ile açılış kaldırıldı; yama46'da
+   görünüm seçiminin hatırlanması kaldırıldı (her açılış bilgisayar görünümü).
+   ========================================================================== */
+(function(){
+  try {
+    var dokun = window.matchMedia && window.matchMedia('(pointer:coarse)').matches;
+    var en = Math.min(screen.width || 0, screen.height || 0) || window.innerWidth;
+    if (dokun && en < 1000){
+      var m = document.querySelector('meta[name="viewport"]');
+      if (m) m.setAttribute('content', 'width=' + (en >= 700 ? 1200 : 1500));
+      window.Y47_MASAUSTU = true;
+      document.documentElement.classList.add('y47Dokun');
+    }
+  } catch(e){}
+})();
+</script>
 <title>4-6 Yaş Yardımcı Personel Maaş Programı</title>
 <style>
 :root{
@@ -295,8 +327,10 @@ table.izgara td.notu{font-size:12px;color:var(--soluk);text-align:left;padding:3
       <ul>
         <li>Sayfalar soldaki menüde beş başlık şeridinin altında durur: <b>PUANTAJ</b> (Aylık Puantaj, Puantaj Cetveli), <b>MAAŞ</b> (Maaş Listesi, SGK Dağılım/Bildirge), <b>PERSONEL</b> (Personel), <b>BELGELER</b> (altı belge, bkz. 11), <b>ARAÇLAR</b> (Görünüm, Yönetim ve altında Yedek Al, Yedek Yükle). Kılavuz menünün en üstünde, kırmızı zeminlidir. Şeride tıklayınca altı kapanır/açılır; durum hatırlanır.</li>
         <li>Menüde aylık işin yapıldığı sayfaların önünde iş sırası numarası vardır: 1 Aylık Puantaj, 2 Puantaj Cetveli, 3 Maaş Listesi, 4 SGK Dağılım/Bildirge. Bu dört sayfanın ve BELGELER altındaki belgelerin adı, numarası ve simgesi siyahtır, Ubuntu yazı tipiyle yazılır (yazı tipi programın içindedir); açık sayfanın numarası beyaz yuvarlak içindedir. Personel kırmızıdır. Puantaj Cetveli'nin simgesi çizgili tablodur. Menüdeki grup başlıkları renkli şeritlerdir: PUANTAJ turuncu, MAAŞ sarı, PERSONEL mavi, BELGELER yeşil, ARAÇLAR turkuaz; yazıları beyaz ve büyüktür.</li>
-        <li>Bilgisayarda program açılınca <b>Aylık Puantaj</b> sayfası gelir; telefonda ve tablette <b>BELGELER</b> gelir.</li>
-        <li><b>Telefon ve tablet:</b> program telefona ve tablete göre görünür. Ekran dar olunca sol menü çekmece olur: başlığın solundaki <b>☰</b> ile açılır, sayfa seçilince ya da boş yere dokununca kapanır. Telefonda program açılınca menü de açık gelir, BELGELER'den belge seçilir. Sayfalar ekranın enine sığar, geniş tablolar kendi içinde yana kaydırılır; yazılar iki parmakla büyütülebilir (başlıktaki − %100 + düğmeleri telefonda yoktur). Belgeler telefonda da doldurulur, indirilir, yazdırılır (Yazdır'dan PDF olarak da kaydedilebilir); baskı önizlemesi telefonda sayfayı ekrana sığdırarak açılır. Bilgiler her telefonun kendi tarayıcısında durur.</li>
+        <li>Program açılınca <b>Aylık Puantaj</b> sayfası gelir.</li>
+        <li><b>Telefon ve tablet:</b> program telefonda ve tablette de her açılışta doğrudan bilgisayardaki görünümle gelir (sayfa telefonda 1500, tablette 1200 nokta enindeymiş gibi çizilir); parmakla büyütüp kaydırarak kullanılır. Program internetten (GitHub sayfasından) açılınca başlıkta mor <b>📱 Telefon görünümüne geç</b> (tablette <b>📱 Tablet görünümüne geç</b>) düğmesi vardır; basınca program telefona göre düzene geçer, düğmenin adı <b>🖥 Bilgisayar görünümüne geç</b> olur ve basınca bilgisayardaki görünüme dönülür. Bu düğme bilgisayarda ve dosyadan (internetsiz) açılan programda çıkmaz.</li>
+        <li><b>Telefon düzeni:</b> sol menü çekmece olur: başlığın solundaki <b>☰</b> ile açılır, sayfa seçilince ya da boş yere dokununca kapanır. Sayfalar ekranın enine sığar, geniş tablolar kendi içinde yana kaydırılır; yazılar iki parmakla büyütülebilir (başlıktaki − %100 + düğmeleri bu düzende yoktur). Baskı önizlemesi bu düzende sayfayı ekrana sığdırarak açılır. Belgeler telefonda da (iki görünümde de) doldurulur, indirilir, yazdırılır (Yazdır'dan PDF olarak da kaydedilebilir). Bilgiler her telefonun kendi tarayıcısında durur.</li>
+        <li>Sayfanın en altında telif yazısı ve iletişim numarası durur (kâğıda basılmaz); telefonda numaraya dokununca arama açılır.</li>
         <li>Bir sayfanın kendi düğmeleri ağaçta o sayfanın hemen altındadır. Sayfaya tıklayınca düğmeleri açılır. Sayfanın solundaki <b>[−]/[+]</b> kutusu düğmeleri sayfayı değiştirmeden kapatır/açar. Başka bir sayfanın düğmesine basarsanız önce o sayfa açılır.</li>
         <li>İlk şeridin sağındaki <b>«</b> düğmesi menüyü daraltır; dar menüde yalnız simgeler kalır, simgenin üzerine gelince adı görünür. Aynı düğme menüyü yeniden açar.</li>
         <li>Üst başlığın solunda TDV amblemi durur; amblemin altındaki şube adı Yönetim'deki kurum adından gelir (baştaki "TDV" yazılmaz). Sağdaki <b>− %100 +</b> düğmeleri çalışma alanını büyütüp küçültür; yüzdeye tıklayınca %100'e döner. Yazdırılan kâğıt bundan etkilenmez.</li>
@@ -8821,9 +8855,9 @@ table.y29Cet.y33Cet tbody tr.y29Gri td{height:24px}
        boş yere dokununca kapanır. Sayfalar ekranın enine sığar; geniş
        tablolar kendi içinde yana kaydırılır. Başlıktaki yakınlaştırma
        düğmeleri telefonda gizlidir (iki parmakla büyütülür).
-     · Telefonda ve tablette (dokunmatik ekran) program BELGELER ile açılır;
-       telefonda menü de açık gelir, belge seçilince kapanır. Bilgisayarda
-       açılış eskisi gibidir (Aylık Puantaj).
+     · (Kaldırıldı — 21.10.2026 20:19 notu, yama47: telefonda ve tablette de
+       program bilgisayardaki gibi Aylık Puantaj ile ve bilgisayar
+       görünümüyle açılır. Önceden dokunmatik ekranda BELGELER ile açılırdı.)
      · Belgeler telefonda da doldurulur, Önizle / Yazdır / İndir çalışır
        (yama40). Kâğıt ekranın enine sığdırılır; baskı önizlemesi telefonda
        sayfayı ekrana sığdırarak açılır.
@@ -8835,7 +8869,6 @@ table.y29Cet.y33Cet tbody tr.y29Gri td{height:24px}
 (function(){
   'use strict';
   var DAR = window.matchMedia('(max-width:1000px)');
-  var DOKUN = window.matchMedia('(pointer:coarse)');
   function menuAc(ac){ document.body.classList.toggle('y43Acik', !!ac); }
   function kur43(){
     /* ☰ düğmesi ve karartma */
@@ -8878,15 +8911,7 @@ table.y29Cet.y33Cet tbody tr.y29Gri td{height:24px}
     }
     donemGoster();
 
-    /* telefonda / tablette program BELGELER ile açılır */
-    if (DOKUN.matches){
-      try { Uygulama.sekmeAc('belgeler'); } catch(e){}
-      var ser = document.querySelector('#y3Yan .y3Serit[data-serit="belgeler"]'); if (ser) ser.classList.add('acik');
-      if (DAR.matches){
-        menuAc(true);
-        var b0 = document.querySelector('#y3Yan .y3Sayfa[data-belge]'); if (b0 && b0.scrollIntoView) setTimeout(function(){ ser.scrollIntoView({block:'start'}); }, 50);
-      }
-    }
+    /* (telefonda / tablette BELGELER ile açılış 21.10.2026 20:19 notuyla kalktı — yama47) */
   }
   /* ay/yıl seçimi yalnız puantaj cetveli açıkken görünür; programın dönemini gösterir */
   function donemGoster(){
@@ -8961,6 +8986,115 @@ table.y29Cet.y33Cet tbody tr.y29Gri td{height:24px}
 #y3Yan .y3Serit[data-serit]>h4:hover{filter:brightness(.93)}
 #y3Yan .y3Serit[data-serit]{border-bottom-color:rgba(0,0,0,.08)}
 </style>
+
+<style id="yama46-stil">
+/* yama46 — 21.10.2026 — Bilgisayar / Telefon görünümü düğmesi; en altta sabit telif yazısı (açıklama betikte) */
+#y46Gorunum{display:none;flex:none;align-items:center;justify-content:center;gap:5px;background:#6b46c1;color:#fff;border:0;border-radius:6px;
+  padding:6px 10px;font:700 12.5px/1.2 "Segoe UI",Ubuntu,"Noto Sans",Arial,sans-serif;cursor:pointer;margin-right:8px;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+#y46Gorunum:hover{background:#553c9a}
+@media (max-width:1000px) and (pointer:coarse){ #y46Gorunum{display:inline-flex} }
+body.y46Masaustu #y46Gorunum{display:inline-flex}
+@media (max-width:520px){ #y46Gorunum{max-width:98px;white-space:normal;text-align:center;padding:4px 7px;font-size:11.5px} }
+/* en altta sabit telif yazısı */
+#y46Telif{flex:none;background:#fff;border-top:1px solid var(--cizgi,#dde3ea);text-align:center;padding:6px 12px 7px;color:#33475b;
+  font:13px/1.45 "Segoe UI",Ubuntu,"Noto Sans",Arial,sans-serif}
+#y46Telif .t1 b{color:#1c2b3a}
+#y46Telif .t2{font-size:11.5px;color:#5c6b7d}
+#y46Telif .t3{font-size:12.5px;margin-top:1px}
+#y46Telif .t3 a{color:#0b7a3e;font-weight:700;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px}
+@media (max-width:520px){ #y46Telif{font-size:11.5px;padding:4px 8px 5px} #y46Telif .t2{font-size:10.5px} #y46Telif .t3{font-size:11.5px} }
+@media print{ #y46Telif,#y46Gorunum{display:none !important} }
+</style>
+<script id="yama46-betik">
+/* ==========================================================================
+   yama46 — 21.10.2026 — KULLANICININ 21.10.2026 16:51 NOTU
+   "Programda telefon görünümüne ve bilgisayar görünümüne geç yok; Sürekli
+    Görev Yolluğu programını incele, aynı şekilde olacak. Ayrıca telif
+    ibaresini sayfamızın en altına sabit olarak göm."
+     · Telefonda ve tablette başlıkta mor "🖥 Bilgisayar görünümü" düğmesi
+       çıkar (bilgisayarda çıkmaz). Basınca sayfa bilgisayardaki düzenle
+       çizilir (telefonda 1500, tablette 1200 nokta enindeymiş gibi; Yolluk
+       programındaki yöntem); parmakla büyütülüp kaydırılarak kullanılır.
+       O zaman düğmenin adı "📱 Telefon görünümü" / "📱 Tablet görünümü"
+       olur, basınca telefon düzenine döner.
+       (21.10.2026 20:19 notu, yama47: program telefonda ve tablette her
+       açılışta bilgisayar görünümüyle gelir; seçimin hatırlanması kalktı.
+       Telefon mu tablet mi, ekranın kısa kenarına bakılır — yan çevrilmiş
+       telefon da telefondur. Düğme yalnız dokunmatik ekranda çıkar.)
+       (21.10.2026 20:35 notu, yama48: düğme yalnız internetten — GitHub —
+       açılınca çıkar; yazıları "… görünümüne geç" oldu.)
+     · Sayfanın en altında, her sayfada sabit duran telif yazısı:
+       "© 2026 — Bu programın telif hakları Abdullah GEDİK'e aittir. /
+       İzinsiz çoğaltılamaz, satılamaz; yapımcı bilgisi silinerek başkasına
+       mal edilemez. / İletişim: 0 505 640 51 80" (numaraya telefonda
+       dokununca arama açılır). Kâğıda basılmaz.
+   ========================================================================== */
+(function(){
+  'use strict';
+  var VP_TEL = 'width=device-width,initial-scale=1';
+  function meta(){ return document.querySelector('meta[name="viewport"]'); }
+  function ekranEni(){ return (window.screen ? Math.min(screen.width || 0, screen.height || 0) : 0) || window.innerWidth; }
+  function masaustuEni(){ return 'width=' + (ekranEni() >= 700 ? 1200 : 1500); }
+  function uygula(masaustu){
+    var m = meta(); if (m) m.setAttribute('content', masaustu ? masaustuEni() : VP_TEL);
+    document.body.classList.toggle('y46Masaustu', masaustu);
+    var b = document.getElementById('y46Gorunum');
+    if (b) b.textContent = masaustu ? (ekranEni() < 700 ? '📱 Telefon görünümüne geç' : '📱 Tablet görünümüne geç') : '🖥 Bilgisayar görünümüne geç';
+    if (masaustu) document.body.classList.remove('y43Acik');
+  }
+  function kur46(){
+    var sag = document.getElementById('y6Sag'), ust = document.querySelector('.ust');
+    if (ust && !document.getElementById('y46Gorunum')){
+      var b = document.createElement('button'); b.type = 'button'; b.id = 'y46Gorunum';
+      b.textContent = '🖥 Bilgisayar görünümüne geç';
+      if (sag && sag.parentNode === ust) ust.insertBefore(b, sag); else ust.appendChild(b);
+      b.addEventListener('click', function(){ uygula(!document.body.classList.contains('y46Masaustu')); });
+    }
+    if (!document.getElementById('y46Telif')){
+      document.body.insertAdjacentHTML('beforeend', '<footer id="y46Telif">'
+        + '<div class="t1">© 2026 — Bu programın telif hakları <b>Abdullah GEDİK</b>\'e aittir.</div>'
+        + '<div class="t2">İzinsiz çoğaltılamaz, satılamaz; yapımcı bilgisi silinerek başkasına mal edilemez.</div>'
+        + '<div class="t3">İletişim: <a href="tel:+905056405180">0 505 640 51 80</a></div></footer>');
+      /* uygulama kabuğunda başlık – gövde – telif sırası (gizli alanlar sonda kalır) */
+      var govde = document.getElementById('y3Govde'), f = document.getElementById('y46Telif');
+      if (govde && govde.parentNode === document.body) document.body.insertBefore(f, govde.nextSibling);
+    }
+    if (window.Y47_MASAUSTU) uygula(true);   /* yama47: telefonda / tablette açılış bilgisayar görünümüyle */
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', kur46); else kur46();
+})();
+</script>
+
+<style id="yama47-stil">
+/* yama47: telefonda / tablette mor görünüm düğmesi hep görünür */
+html.y47Dokun #y46Gorunum{display:inline-flex}
+/* yama47: telefon tarayıcısı geniş görünümde yazıları kendiliğinden büyütmesin (yazılar bilgisayardaki oranda kalır) */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+</style>
+
+<style id="yama48-stil">
+/* ==========================================================================
+   yama48 — 21.10.2026 — KULLANICININ 21.10.2026 20:35 NOTU
+   "Programda Telefon görünümüne ve Bilgisayar görünümüne geç düğmesi
+    olacak; GitHub'a yüklenende, yani telefonda (internetten) açılınca
+    olacak, ama normal internetsiz olanda olmayacak."
+     · Mor düğme yalnız program internetten açılınca (GitHub sayfası, adres
+       http/https ile başlar) telefonda ve tablette çıkar. Bilgisayardaki
+       dosyadan (internetsiz, adres file:// ile başlar) açılınca hiç çıkmaz.
+     · Düğmenin yazısı: "📱 Telefon görünümüne geç" (tablette "📱 Tablet
+       görünümüne geç") ↔ "🖥 Bilgisayar görünümüne geç" (yama46'daki yazılar
+       değiştirildi).
+   ========================================================================== */
+html:not(.y48Internet) #y46Gorunum{display:none !important}
+@media (max-width:520px){ #y46Gorunum{max-width:132px} }
+</style>
+<script id="yama48-betik">
+(function(){
+  'use strict';
+  /* internetten mi açıldı (GitHub vb.)? — dosyadan açılınca (file://) düğme yok */
+  if (/^https?:$/.test(location.protocol)) document.documentElement.classList.add('y48Internet');
+})();
+</script>
 
 </body>
 </html>
