@@ -15,7 +15,7 @@ TDV Mamak Şubesi 4-6 yaş Kur'an kurslarında çalışan yardımcı personelin 
 
 Program dosyasını (.html) tarayıcıda açmanız yeterlidir. Kullanımın ayrıntılı anlatımı programın içindeki kırmızı **Kılavuz** düğmesindedir.
 
-**Telefon ve tablet:** Program ekrana göre görünür. Menü, sol üstteki ☰ düğmesiyle açılır. Telefonda program **Belgeler** ile açılır; kurs yöneticileri dilekçeleri ve puantaj cetvelini buradan doldurup indirebilir.
+**Telefon ve tablet:** Program telefonda ve tablette de bilgisayardaki görünümle açılır; parmakla büyütüp kaydırarak kullanılır. İstenirse başlıktaki mor **📱 Telefon görünümü** düğmesiyle telefona göre düzene geçilir (bu düzende menü sol üstteki ☰ düğmesiyle açılır). Kurs yöneticileri dilekçeleri ve puantaj cetvelini menüdeki **Belgeler**'den doldurup indirebilir.
 
 ## Bilgilerin güvenliği
 
